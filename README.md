@@ -10,7 +10,7 @@
 Toolrinth is the all-in-one companion for keeping up with your favorite Modrinth projects! Dive in to each update with project tracking, or easily fetch information about any project with a search!
 
 > [!TIP]
-> Toolrinth Canary is an unstable, half-baked version of Toolrinth intended for development. For a stable, thoughtful experience, check out the [stable bot](https://github.com/duckyyylol/toolrinth/tree/main)
+> Toolrinth Canary is an unstable, half-baked version of Toolrinth intended for development. For a stable, thoughtful experience, check out the [stable branch](https://github.com/duckyyylol/toolrinth/tree/main)
 
 ### Features
 > `User-Installable` - *Access Toolrinth on any server, even ones without the bot!*
