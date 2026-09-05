@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "@types/cheerio": "^0.22.35",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^26.4.1",
+    "@types/sharp": "^0.31.1",
+    "better-sqlite3": "^13.0.3",
+    "chalk": "^6.0.0",
+    "cheerio": "^1.2.0",
+    "discord.js": "^14.27.0",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
+    "drizzle-orm": "^0.45.2",
+    "fast-average-color-node": "^3.2.0",
+    "fs-extra": "^11.4.0",
+    "modrinth-api-client": "^1.1.0",
+    "sharp": "^0.35.4"
+  },
+  "name": "toolrinth",
+  "version": "1.0.0",
+  "description": "Toolrinth is the all-in-one companion for keeping up with your favorite Modrinth projects! Dive in to each update with project tracking, or easily fetch information about any project with a search!",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon --exec \"npx tsx src/index.ts -dev\" --ext .ts",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "keywords": [],
+  "author": "duckyyylol",
+  "license": "ISC"
+}
