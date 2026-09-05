@@ -4,7 +4,7 @@
 
 ---
 
-[![Toolrinth Canary CTA Banner](https://files.ducky.wiki/share/public_assets/projects/toolrinth/Toolrinth_Banner_Canary_CTA.png)](https://discord.com/oauth2/authorize?client_id=1545764581417291816)
+[![Toolrinth Canary CTA Banner](https://files.ducky.wiki/share/public_assets/projects/toolrinth/Toolrinth_Banner_Canary_CTA.png)](https://discord.com/oauth2/authorize?client_id=1545933466196254761)
 
 # Toolrinth Canary
 Toolrinth is the all-in-one companion for keeping up with your favorite Modrinth projects! Dive in to each update with project tracking, or easily fetch information about any project with a search!
