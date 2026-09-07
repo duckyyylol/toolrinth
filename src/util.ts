@@ -1,6 +1,6 @@
-import { Project, ProjectType, Version } from "modrinth-api-client"
+import { Project, ProjectType, Version } from "@toolrinth/lib"
 import { apiClient, client } from "."
-import { ApplicationEmoji, ChatInputCommandInteraction, Client, ComponentType, Interaction, InteractionCallback, MessageFlags, TextChannel, TimestampStylesString } from "discord.js";
+import { ApplicationEmoji, ApplicationIntegrationType, ChatInputCommandInteraction, Client, ComponentType, Interaction, InteractionCallback, MessageFlags, TextChannel, TimestampStylesString } from "discord.js";
 import { RinthComponentBuilder } from "./class/ComponentBuilder";
 import { getAverageColor } from "fast-average-color-node";
 import config from "./constants";
@@ -196,4 +196,12 @@ export const getLatestProjectVersion = async (id: string, gameVersion: string, l
   const versions = res.data.filter(v => v.game_versions.includes(gameVersion) && v.loaders.includes(loader)).sort((a, b) => new Date(b.date_published).getTime() - new Date(a.date_published).getTime());
 
   return versions?.[0] || null;
+}
+
+export const getContext = (interaction: Interaction): string => {
+  const isGuild = interaction.authorizingIntegrationOwners[ApplicationIntegrationType.GuildInstall] !== undefined;
+
+  if (isGuild && interaction.guildId) return interaction.guildId;
+
+  return interaction.user.id;
 }

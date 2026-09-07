@@ -8,22 +8,23 @@ import {
 } from "discord.js";
 import { configDotenv } from "dotenv";
 import { readdirSync } from "fs";
-import { ApiClient, Project, TeamMember, Version } from "modrinth-api-client";
+import { ApiClient, Project, TeamMember, Version } from "@toolrinth/lib";
 import { join } from "path";
 import { Command } from "./class/Command";
 import Logger from "./class/Logger";
 import { avgColor, getLatestProjectVersion, svgToPng, timestamp } from "./util";
-import * as cheerio from "cheerio";
-import { load } from "cheerio/slim";
 import { DB } from "./db/DB";
 import { RinthComponentBuilder } from "./class/ComponentBuilder";
 import config from "./constants";
 import { tracked_projects } from "./db/schema";
+import * as webserver from "./webserver"
 
 configDotenv({ path: join(process.cwd(), ".env"), quiet: true });
 
 export const client = new Client({ intents: [] });
 export const apiClient = new ApiClient();
+
+const apiClients: Map<string, ApiClient> = new Map();
 
 export const dev_mode = process.argv.includes("-dev");
 export const desiredExt = dev_mode ? ".ts" : ".js";
@@ -106,6 +107,18 @@ async function loadCommands(c: Client) {
     });
 }
 
+export function setApiClient(guildId: string, token: string | null = null): ApiClient {
+  const ac = new ApiClient(token);
+  apiClients.set(guildId, ac);
+  logger.info(`Updated API client for guild ${guildId}${token ? " [with a token]" : ""}`)
+  return ac;
+}
+
+export function getApiClient(guildId?: string): ApiClient {
+  if (!guildId || !apiClients.has(guildId)) return new ApiClient();
+  return apiClients.get(guildId);
+}
+
 export async function sendTrackedProjectUpdate(pr: Project, project: typeof tracked_projects.$inferInsert, channel: TextChannel, latestVersion: Version, initial: boolean = false) {
   const icon = pr?.icon_url || config.images.icon;
   const color = await avgColor(icon);
@@ -177,9 +190,15 @@ client.on(Events.ClientReady, async () => {
   await loadEvents(client);
   await loadCommands(client);
   await trackedProjectHandler();
+  webserver.start();
 
   for (const guild of client.guilds.cache.values()) {
-    if (!DB.Guilds.getGuild(guild.id)) DB.Guilds.createGuild({ id: guild.id });
+    let dbGuild = DB.Guilds.getGuild(guild.id);
+    if (!dbGuild) dbGuild = DB.Guilds.createGuild({ id: guild.id });
+
+    if (dbGuild.token) {
+      setApiClient(dbGuild.id, dbGuild.token);
+    } else setApiClient(dbGuild.id)
   }
 });
 
