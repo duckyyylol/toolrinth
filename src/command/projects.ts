@@ -1,8 +1,8 @@
 import { ApplicationCommandOptionType, ApplicationIntegrationType, ButtonBuilder, ButtonStyle, channelMention, ChannelType, ComponentAssertions, ComponentType, inlineCode, MessageFlags, PermissionFlagsBits, RoleSelectMenuInteraction, SeparatorBuilder, SeparatorSpacingSize, TextChannel } from "discord.js";
 import { Command } from "../class/Command";
 import { allProjectTypes, appEmoji, avgColor, createCustomId, formatCompactNumber, formatTime, generateCustomId, getLatestProjectVersion, parseCustomId, reply, sendTrackingIntro, sendTrackingOutro, timestamp } from "../util";
-import { apiClient, logger, sendTrackedProjectUpdate } from "..";
-import { FacetBuilder, FacetOperations, Facets, GameVersionTypes, Project, ProjectTypes } from "modrinth-api-client";
+import { apiClient, client, getApiClient, logger, sendTrackedProjectUpdate } from "..";
+import { ApiClient, FacetBuilder, FacetOperations, Facets, GameVersionTypes, Project, ProjectTypes } from "@toolrinth/lib";
 import { RinthComponentBuilder } from "../class/ComponentBuilder";
 import config from "../constants";
 import { DB } from "../db/DB";
@@ -87,6 +87,7 @@ const ProjectsCommand: Command = {
     }
   ],
   autocomplete: async interaction => {
+    const apiClient = getApiClient(interaction.guildId);
     const focused = interaction.options.getFocused(true);
     if (focused.name === "query") {
       const query = focused.value.trim();
@@ -145,9 +146,10 @@ const ProjectsCommand: Command = {
     }
   },
   run: async interaction => {
+    const apiClient = getApiClient(interaction?.guildId);
     const subcommand = interaction.options.getSubcommand(true);
 
-    if(!["search"].includes(subcommand) && !interaction.channel) return reply(interaction, RinthComponentBuilder.errorContainer(false, `You can not do that in this context.`), true);
+    if(!["search"].includes(subcommand) && (interaction.authorizingIntegrationOwners[ApplicationIntegrationType.GuildInstall] === undefined)) return reply(interaction, RinthComponentBuilder.errorContainer(false, `You can not do that in this context.`), true);
 
     switch (subcommand) {
       case "search": {

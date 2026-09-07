@@ -36,4 +36,23 @@ export namespace DB {
       return db.delete(tracked_projects).where(and(eq(tracked_projects.project_id, project_id), eq(tracked_projects.guild_id, guild_id))).returning().get();
     }
   }
+  export namespace Auth {
+    export const updateAuth = (guildId: string, userId: string, token: string): typeof guilds.$inferInsert => {
+      let guild = Guilds.getGuild(guildId);
+      if (!guild) return Guilds.createGuild({ id: guildId, authorized: true, authorized_user_id: userId, token });
+      return db.update(guilds).set({ authorized: true, authorized_user_id: userId, token }).where(eq(guilds.id, guild.id)).returning().get();
+    }
+
+    export const getToken = (guildId: string): string | null => {
+      let guild = Guilds.getGuild(guildId);
+      if (!guild || !guild.token) return null;
+      return guild.token;
+    }
+
+    export const removeAuth = (guildId: string): typeof guilds.$inferInsert => {
+      let guild = Guilds.getGuild(guildId);
+      if (!guild) return Guilds.createGuild({ id: guildId, authorized: false });
+      return db.update(guilds).set({ authorized: false, authorized_user_id: null, token: null }).where(eq(guilds.id, guild.id)).returning().get();
+    }
+  }
 }
