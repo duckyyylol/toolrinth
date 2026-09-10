@@ -470,4 +470,4 @@ emitter.on(RinthEvents.USER_AUTHORIZE, async (contextId: string, userId: string,
   }
 });
 
-client.login(dev_mode ? process.env.TOKEN_DEV : process.env.TOKEN);
+client.login(dev_mode ? process.env.TOKEN_DEV : config.canary ? process.env.TOKEN_CANARY : process.env.TOKEN);
