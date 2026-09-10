@@ -172,7 +172,7 @@ async function updateTrackedProjects() {
   const projects = await DB.Contexts.getAllTrackedProjects();
 
   for (const project of projects) {
-    const context = await DB.Contexts.getContext(project.context_id);
+    const context = await DB.Contexts.getContext(project.context_id) || await DB.Contexts.createContext({id: project.context_id});
 
     if (context.type === ContextTypes.GUILD) {
       const guild = await client.guilds.fetch(project.context_id);
