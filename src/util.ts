@@ -1,5 +1,5 @@
 import { Project, ProjectType, Version } from "@toolrinth/lib"
-import { apiClient, client } from "."
+import { apiClient, applicationEmojis, client } from "."
 import { ApplicationEmoji, ApplicationIntegrationType, ChatInputCommandInteraction, Client, ComponentType, Interaction, InteractionCallback, MessageFlags, TextChannel, TimestampStylesString } from "discord.js";
 import { RinthComponentBuilder } from "./class/ComponentBuilder";
 import { getAverageColor } from "fast-average-color-node";
@@ -7,6 +7,7 @@ import config from "./constants";
 import sharp from "sharp";
 import { join } from "path";
 import { ensureDirSync } from "fs-extra";
+import { ContextTypes } from "./types";
 
 export type InteractionInfo = {
     command?: string;
@@ -136,6 +137,10 @@ export const avgColor = async <T extends boolean = false>(
   }
 };
 
+export const getFirst = <T>(arr: T[]): T | null => {
+  return arr?.[0] || null;
+}
+
 export const formatTime = (time: Date | number): string => {
   let formatter = new Intl.DateTimeFormat("en-US", {
     dateStyle: "short",
@@ -145,8 +150,8 @@ export const formatTime = (time: Date | number): string => {
   return formatter.format(time);
 }
 
-export const timestamp = (time: Date, style: TimestampStylesString): string => {
-  return `<t:${Math.floor(time.getTime() / 1000)}:${style}>`
+export const timestamp = (time: Date | number, style: TimestampStylesString): string => {
+  return `<t:${Math.floor(((typeof time === "number" ? time : time.getTime())) / 1000)}:${style}>`
 }
 
 export const formatCompactNumber = (num: number): string => {
@@ -164,8 +169,7 @@ export const svgToPng = async (svg: string, filename: string): Promise<void> => 
 }
 
 export const appEmoji = async (emojiName: string): Promise<ApplicationEmoji | null> => {
-    let ems = await client.application.emojis.fetch()
-    let emoji = ems.find(e => e.name.toLowerCase() === emojiName.toLowerCase());
+  let emoji = applicationEmojis.get(emojiName.toLowerCase()) || (await client.application.emojis.fetch()).find(e => e.name.toLowerCase() === emojiName.toLowerCase());
 
     return emoji || null;
 }
@@ -204,4 +208,12 @@ export const getContext = (interaction: Interaction): string => {
   if (isGuild && interaction.guildId) return interaction.guildId;
 
   return interaction.user.id;
+}
+
+export const getContextType = (interaction: Interaction): ContextTypes => {
+  const isGuild = interaction.authorizingIntegrationOwners[ApplicationIntegrationType.GuildInstall] !== undefined;
+
+  if (isGuild && interaction.guildId) return ContextTypes.GUILD;
+
+  return ContextTypes.USER;
 }
