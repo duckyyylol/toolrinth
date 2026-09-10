@@ -435,7 +435,7 @@ client.on(Events.ClientReady, async () => {
   webserver.start();
 
   if (client.application.description !== config.bio) {
-    await client.application.edit({ description: config.bio });
+    await client.application.edit({ description: dev_mode ? `⚠️ **This version of Toolrinth is __unstable__, try Canary!**\n${config.bio.replace("{0}", `${await appEmoji("toolrinth")}`)}` : config.bio.replace("{0}", `${await appEmoji("toolrinth")}`) });
   }
 
   for (const guild of client.guilds.cache.values()) {

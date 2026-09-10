@@ -10,7 +10,7 @@ const config = {
     icon: "https://files.ducky.wiki/share/public_assets/external/ModrinthBot/ModrinthLogo.png"
   },
   official_accounts: ['modrinth', 'automod', 'modrintharchives'],
-  bio: "<:_:1545915514944225314> Toolrinth is the all-in-one companion for keeping up with your favorite Modrinth projects!\n\n<:_:1545917309296836688> With tons of features to enhance your Modrinth experience, Toolrinth makes it easy to stay up-to-date, stay notified, and display your favorite Modrinth projects anywhere on Discord."
+  bio: "{0} Toolrinth is the all-in-one companion for keeping up with your favorite Modrinth projects!\n\n<:_:1545917309296836688> With tons of features to enhance your Modrinth experience, Toolrinth makes it easy to stay up-to-date, stay notified, and display your favorite Modrinth projects anywhere on Discord."
 }
 
 export default config;
