@@ -40,6 +40,8 @@ import {
   parseCustomId,
   InteractionInfo,
 } from "../util";
+import config from "../constants";
+import { client } from "..";
 
 export class RinthComponentBuilder {
   container: ContainerBuilder;
@@ -348,6 +350,7 @@ export class RinthComponentBuilder {
   }
 
   setAccentColor(color: RGBTuple | number): RinthComponentBuilder {
+    if (color === config.brand_color && client.user.id === config.canary_client_id) color = config.brand_color_canary;
     this.container.setAccentColor(color);
     return this;
   }
