@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const webUrl = config.web_url;
+const webUrl = dev_mode ? "https://dev.ducky.wiki" : config.web_url;
 
 const contexts: Map<string, { contextId: string; userId: string; }> = new Map(); // state id, {context id, user id}
 
