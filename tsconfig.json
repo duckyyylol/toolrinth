@@ -14,8 +14,8 @@
     "module": "NodeNext",
     "target": "ES2021",
     "lib": ["ES2021"],
-    "strict": false
+    "strict": false,
   },
   "include": ["./src/**/*"],
-  "exclude": ["./node_modules/**/*"],
+  "exclude": ["./node_modules/**/*", "drizzle.config.ts"],
 }
