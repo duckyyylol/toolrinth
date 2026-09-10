@@ -9,12 +9,7 @@
 # Toolrinth
 Toolrinth is the all-in-one companion for keeping up with your favorite Modrinth projects! Dive in to each update with project tracking, or easily fetch information about any project with a search!
 
-### Features
-> `User-Installable` - *Access Toolrinth on any server, even ones without the bot!*
-> 
-> `Project Lookup` - *Easily fetch information about any project on Modrinth. (/projects search)*
-> 
-> `Project Tracking` - *Stay up-to-date with realtime project version updates! (/projects track)*
+[Toolrinth.com](https://toolrinth.com)
 
 ---
 
