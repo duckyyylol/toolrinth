@@ -1,5 +1,5 @@
 import "dotenv/config"
-configDotenv({ path: join(process.cwd(), ".env"), quiet: true });
+import { configDotenv } from "dotenv";
 import {
   ApplicationCommandData,
   ApplicationEmoji,
@@ -13,7 +13,6 @@ import {
   MessageFlags,
   TextChannel,
 } from "discord.js";
-import { configDotenv } from "dotenv";
 import { readdirSync } from "fs";
 import { ApiClient, OAuth2, Project, User, UserNotification, UserNotificationTypes, Version } from "@toolrinth/lib";
 import { join } from "path";
@@ -30,6 +29,7 @@ import EventEmitter from "events";
 import { randomUUID } from "crypto";
 import { getLoginContainer } from "./command/settings";
 
+configDotenv({ path: join(process.cwd(), ".env"), quiet: true });
 
 export const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages] });
 export const apiClient = new ApiClient();
