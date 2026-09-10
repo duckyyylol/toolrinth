@@ -1,5 +1,5 @@
 #### App Built With
-[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://github.com/microsoft/TypeScript) [![Discord.JS](https://files.ducky.wiki/share/public_assets/external/DiscordJSBadge.svg)](https://github.com/discordjs/discord.js) [![Drizzle](https://img.shields.io/badge/Drizzle-%23000000?style=for-the-badge&logo=drizzle&logoColor=C5F74F)](https://github.com/drizzle-team/drizzle-orm) ![Modrinth](https://files.ducky.wiki/share/public_assets/external/ModrinthBadge.svg)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://github.com/microsoft/TypeScript) [![Discord.JS](https://files.ducky.wiki/share/public_assets/external/DiscordJSBadge.svg)](https://github.com/discordjs/discord.js) [![Drizzle](https://img.shields.io/badge/Drizzle-%23000000?style=for-the-badge&logo=drizzle&logoColor=C5F74F)](https://github.com/drizzle-team/drizzle-orm) ![Modrinth](https://files.ducky.wiki/share/public_assets/external/ModrinthBadge.svg) [![ToolrinthLib](https://files.ducky.wiki/share/public_assets/projects/toolrinth/ToolrinthLib_Badge.png)](https://docs.lib.toolrinth.com)
 
 
 ---
@@ -12,12 +12,7 @@ Toolrinth is the all-in-one companion for keeping up with your favorite Modrinth
 > [!TIP]
 > Toolrinth Canary is an unstable, half-baked version of Toolrinth intended for development. For a smooth, thoughtful experience, check out the [stable branch](https://github.com/duckyyylol/toolrinth/tree/main)
 
-### Features
-> `User-Installable` - *Access Toolrinth on any server, even ones without the bot!*
-> 
-> `Project Lookup` - *Easily fetch information about any project on Modrinth. (/projects search)*
-> 
-> `Project Tracking` - *Stay up-to-date with realtime project version updates! (/projects track)*
+[Toolrinth.com](https://toolrinth.com)
 
 ---
 
