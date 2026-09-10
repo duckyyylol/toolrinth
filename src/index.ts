@@ -434,6 +434,10 @@ client.on(Events.ClientReady, async () => {
 
   webserver.start();
 
+  if (client.application.description !== config.bio) {
+    await client.application.edit({ description: config.bio });
+  }
+
   for (const guild of client.guilds.cache.values()) {
     let dbGuild = await DB.Contexts.getContext(guild.id);
     if (!dbGuild) dbGuild = await DB.Contexts.createContext({ id: guild.id, type: ContextTypes.GUILD });
