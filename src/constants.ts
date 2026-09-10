@@ -1,4 +1,5 @@
 const config = {
+  canary: true,
   brand_color: 0x2BA572,
   brand_color_canary: 0xB933AF,
   client_id: "1545764581417291816",
