@@ -14,18 +14,42 @@ export default class Logger {
   }
 
   info(...args: any[]) {
-    console.info(chalk.white(this.prefix(), chalk.blue(args)))
+    for (const arg of args) {
+      try {
+        console.log(chalk.white(this.prefix(), chalk.blue(JSON.stringify(arg))))
+      }catch(e) {
+        console.log(chalk.white(this.prefix(), chalk.blue(arg)))
+      }
+    }
   }
 
   warn(...args: any[]) {
-    console.info(chalk.yellowBright(this.prefix(), chalk.yellow(args)))
+    for(const arg of args) {
+      try {
+        console.log(chalk.yellowBright(this.prefix(), chalk.yellow(JSON.stringify(arg))))
+      }catch(e) {
+        console.log(chalk.yellowBright(this.prefix(), chalk.yellow(arg)))
+      }
+    }
   }
 
   success(...args: any[]) {
-    console.info(chalk.white(this.prefix(), chalk.green(args)))
+    for(const arg of args) {
+      try {
+        console.log(chalk.white(this.prefix(), chalk.green(JSON.stringify(arg))))
+      }catch(e) {
+        console.log(chalk.white(this.prefix(), chalk.green(arg)))
+      }
+    }
   }
 
   error(...args: any[]) {
-    console.info(chalk.redBright(this.prefix(), chalk.red(args)))
+    for(const arg of args) {
+      try {
+        console.log(chalk.redBright(this.prefix(), chalk.red(JSON.stringify(arg))))
+      } catch (e) {
+        console.log(chalk.redBright(this.prefix(), chalk.red(arg)))
+      }
+    }
   }
 }
