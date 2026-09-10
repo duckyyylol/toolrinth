@@ -5,7 +5,7 @@ const config = {
   client_id: "1545764581417291816",
   canary_client_id: "1545933466196254761",
   web_url: "https://toolrinth.com",
-  auth_url: "https://auth.toolrinth.com",
+  auth_url: "https://canary.auth.toolrinth.com",
   images: {
     icon: "https://files.ducky.wiki/share/public_assets/external/ModrinthBot/ModrinthLogo.png"
   },
